@@ -1,28 +1,24 @@
-import { createBrowserRouter } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ErrorPage from "../pages/Errors";
 import Pages from "../pages";
 import Cart from "@/pages/Cart";
 import Product from "@/pages/Product";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
-const Router = createBrowserRouter([
-    {
-        path: "/",
-        errorElement: <ErrorPage />,
-        children: [
-            {
-                index: true, // Tidak perlu path: '/' jika index diatur true
-                element: <Pages />,
-            },
-            {
-                path: "cart", 
-                element: <Cart />,
-            },
-            {
-                path: "product", 
-                element: <Product />,
-            },
-        ],
-    },
-]);
+function Router() {
+  return (
+    <BrowserRouter>
+        <Navbar />
+        <Routes>
+            <Route path="/" element={<Pages />} />
+            <Route path="cart" element={<Cart />} />
+            <Route path="product" element={<Product />} />
+            <Route path="*" element={<ErrorPage />} /> {/* Catch-all route for errors */}
+        </Routes>
+        <Footer />
+    </BrowserRouter>
+  );
+}
 
 export default Router;
